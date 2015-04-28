@@ -26,5 +26,13 @@ module VagrantPlugins
         puts "ran command"
       end
     end
+
+    class GetGuestIP < Vagrant.plugin('2', :command)
+      def execute
+        with_target_vms(nil, {:single_target=>false}) do |machine|
+          print machine.ssh_info
+        end
+      end
+    end
   end
 end
