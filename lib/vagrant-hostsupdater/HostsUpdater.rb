@@ -10,9 +10,11 @@ module VagrantPlugins
           ip = options[:ip] if key == :private_network
           if ip
             ips.push(ip)
-          else if @machine.ssh_info
-            ip = @machine.ssh_info[:host]
-            ips.push(ip) if ip != '127.0.0.1'
+          else
+            if @machine.ssh_info
+              ip = @machine.ssh_info[:host]
+              ips.push(ip) if ip != '127.0.0.1'
+            end
           end
         end
         return ips
